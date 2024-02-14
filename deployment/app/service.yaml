@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: warehousemanager
+  namespace: warehousemanager
+  labels:
+    app: warehousemanager
+spec:
+  ports:
+    - port: 5086
+      name: http
+      targetPort: http
+  selector:
+    app: warehousemanager

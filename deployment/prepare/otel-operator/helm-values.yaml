@@ -1,0 +1,6 @@
+replicaCount: 1
+admissionWebhooks:
+  certManager:
+    enabled: false
+  autoGenerateCert:
+    enabled: true

@@ -1,0 +1,45 @@
+prometheus:
+  prometheusSpec:
+    enableRemoteWriteReceiver: true
+grafana:
+  enabled: true
+  env:
+    GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
+    GF_AUTH_ANONYMOUS_ENABLED: true
+    GF_AUTH_BASIC_ENABLED: false
+  sidecar:
+    dashboards:
+      enabled: true
+      label: grafana_dashboard
+      labelValue: "1"
+      searchNamespace: ALL
+      provider:
+        allowUiUpdates: true
+    datasources:
+      enabled: true
+      defaultDatasourceEnabled: true
+      isDefaultDatasource: true
+      uid: prometheus
+  defaultDashboardsEnabled: false
+prometheus-node-exporter:
+  enabled: false
+nodeExporter:
+  enabled: false
+kubeStateMetrics:
+  enabled: false
+alertmanager:
+  enabled: false
+kubeApiServer:
+  enabled: false
+kubelet:
+  enabled: false
+kubeEtcd:
+  enabled: false
+kubeControllerManager:
+  enabled: false
+coreDns:
+  enabled: false
+kubeScheduler:
+  enabled: false
+kubeProxy:
+  enabled: false

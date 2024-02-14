@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: warehousemanager
+  namespace: warehousemanager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: warehousemanager
+  template:
+    metadata:
+      labels:
+        app: warehousemanager
+    spec:
+      containers:
+      - name: warehousemanager
+        image: otel-demo-warehouse-warehousemanager:latest
+        imagePullPolicy: Never
+        env:
+        - name: AppSettings__OtelEndpoint
+          value: "http://otel-collector-collector.monitoring:4317"
+        ports:
+          - name: http
+            containerPort: 5086
+            protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /health_check
+            port: http
+        readinessProbe:
+          httpGet:
+            path: /health_check
+            port: http
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
